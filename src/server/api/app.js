@@ -1,9 +1,17 @@
 const router = require("express").Router();
-const { logger } = require("../logger");
+const {
+  handleResourceNotFountError,
+  handleJSONResponse,
+} = require("../middlewares/errorHandler");
+const api = require("../api");
 
-router.get("/live", (req, res) => {
-  logger.info("Sending Liveness check");
-  res.send("Ok");
-});
+router.get("/live", api.http(api.AppStatusAPI.getLiveStatus));
+
+// User APIs
+router.post("/users/signup", api.http(api.UserApi.signup));
+
+// Middleware to handle not found error and other errors
+router.use(handleResourceNotFountError);
+router.use(handleJSONResponse);
 
 module.exports = router;
