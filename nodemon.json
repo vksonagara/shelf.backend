@@ -1,0 +1,12 @@
+{
+  "watch": ["src/**/*.js"],
+  "ignore": [".git", "node_modules/**/node_modules", "content"],
+  "verbose": true,
+  "script": "src/index.js",
+  "delay": 600,
+  "env": {
+    "NODE_ENV": "development",
+    "DEBUG": "pa:*",
+    "DEBUG_DEPTH": null
+  }
+}

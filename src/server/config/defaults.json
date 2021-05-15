@@ -1,0 +1,13 @@
+{
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8080
+  },
+  "debug": true,
+  "database": {
+    "host": "127.0.0.1",
+    "port": 27017,
+    "username": "test",
+    "password": "1234"
+  }
+}
