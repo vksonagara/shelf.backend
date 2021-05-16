@@ -59,6 +59,7 @@ const logContextMiddleware = (req, res, next) => {
   const requestContext = {
     requestId: uuid.v4(),
     ipAddress: req.ip,
+    url: req.url,
   };
   const child = logger.child(requestContext);
   const store = new Map();
