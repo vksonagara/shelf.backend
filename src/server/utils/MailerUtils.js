@@ -21,7 +21,9 @@ const sendVerifyEmail = async ({ firstName, emailId, verificationToken }) => {
           },
         ],
         Subject: "PA signup - verify email address",
-        TextPart: `Hi ${firstName}, Please verify your email using this token: ${verificationToken}`,
+        TextPart: `Hi ${firstName}, Please verify your email using this link: ${config.get(
+          "server:host"
+        )}/verify-email?token=${verificationToken}`,
       },
     ],
   });
