@@ -7,6 +7,11 @@ const signupSchema = Joi.object({
   password: Joi.string().min(4).max(64).required().label("Password"),
 });
 
+const verifyEmailSchema = Joi.object({
+  token: Joi.string().required(),
+});
+
 module.exports = {
   signupSchema,
+  verifyEmailSchema,
 };
