@@ -21,9 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "4mb" }));
 // enable gzip compression
 app.use(compress());
 
-// CORS pre-flight check
-app.options(`*`, cors);
-
 // enable cors
 app.use(cors());
 
