@@ -1,5 +1,6 @@
 const _ = require("lodash");
 const User = require("../../models/User");
+const UserSession = require("../../models/UserSession");
 const CryptoUtils = require("../../utils/CryptoUtils");
 const errors = require("../../errors");
 const UserVerificationTokenUtils = require("./UserVerificationTokenUtils");
@@ -43,6 +44,60 @@ class UserUtils {
     if (_.isEmpty(alreadyVerifiedEmail)) {
       await User.updateOne({ _id: userId }, { $set: { isVerified: true } });
     }
+  }
+
+  static async isCorrectCredentials({ emailId, password }) {
+    const user = await User.findOne({
+      emailId,
+      isVerified: true,
+      isDeleted: false,
+    }).lean();
+
+    if (_.isEmpty(user)) {
+      return false;
+    }
+
+    const isCorrectPassword = await CryptoUtils.comparePassword(
+      password,
+      user.password
+    );
+
+    return isCorrectPassword;
+  }
+
+  static async getUser(filter) {
+    const user = await User.findOne(filter).lean();
+
+    return _.omit(user, ["password"]);
+  }
+
+  static async addUserSession(refreshToken, userId) {
+    await UserSession.create({
+      refreshToken,
+      userId,
+    });
+  }
+
+  static async getUserSessions(userId) {
+    const userSessions = await UserSession.find({
+      userId,
+    }).lean();
+
+    return userSessions;
+  }
+
+  // Use to logout user from all devices
+  static async destroyUserSessions(userId) {
+    await UserSession.deleteMany({
+      userId,
+    });
+  }
+
+  // Block user request from a particular `refreshToken` or use for sign-out
+  static async destroyUserSession(refreshToken) {
+    await UserSession.deleteOne({
+      refreshToken,
+    });
   }
 }
 
