@@ -10,6 +10,9 @@
     "schema": "pa",
     "debug": false
   },
+  "logs": {
+    "level": "info"
+  },
   "mailjet": {
     "apiKey": "",
     "secretKey": ""

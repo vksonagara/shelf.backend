@@ -31,10 +31,18 @@ class UserUtils {
     const userId = await UserVerificationTokenUtils.getUserId(token);
 
     if (!userId) {
-      throw new errors.AppError("Invalid token", 409);
+      throw new errors.AppError("Token invalid/expired", 409);
     }
 
-    await User.updateOne({ _id: userId }, { $set: { isVerified: true } });
+    const user = await User.findOne({ _id: userId }).lean();
+    const alreadyVerifiedEmail = await User.findOne({
+      emailId: user.emailId,
+      isVerified: true,
+    }).lean();
+
+    if (_.isEmpty(alreadyVerifiedEmail)) {
+      await User.updateOne({ _id: userId }, { $set: { isVerified: true } });
+    }
   }
 }
 
