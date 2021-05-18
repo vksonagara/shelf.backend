@@ -4,6 +4,7 @@ const debug = require("debug")("pa:init");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const compress = require("compression");
+const cookieParser = require("cookie-parser");
 const config = require("./config");
 const { logContextMiddleware, requestLogMiddleware } = require("./logger");
 const api = require("./api/app.js");
@@ -17,6 +18,9 @@ app.use(bodyParser.json({}));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true, limit: "4mb" }));
+
+// parse cookies
+app.use(cookieParser());
 
 // enable gzip compression
 app.use(compress());

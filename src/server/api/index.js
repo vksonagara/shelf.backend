@@ -5,7 +5,7 @@ const UserApi = require("./UserApi");
 const http = function http(apiMethod) {
   return async function apiHandler(req, res, next) {
     const object = req.body;
-    const requestKeys = ["file", "files", "headers", "params", "query"];
+    const requestKeys = ["file", "files", "headers", "params", "query", "cookies"];
 
     const options = {
       ..._.pick(req, requestKeys),

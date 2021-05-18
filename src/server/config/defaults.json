@@ -16,5 +16,9 @@
   "mailjet": {
     "apiKey": "",
     "secretKey": ""
+  },
+  "jwt": {
+    "accessSecret": "secret",
+    "refreshSecret": "secret"
   }
 }

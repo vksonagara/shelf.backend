@@ -9,6 +9,12 @@ const generatePasswordHash = async (password) => {
   return passwordHash;
 };
 
+const comparePassword = async (password, passwordHash) => {
+  const isCorrectPassword = await bcrypt.compare(password, passwordHash);
+
+  return isCorrectPassword;
+};
+
 const generateRandomUniqueToken = () => {
   const buffer = crypto.randomBytes(48);
   const token = buffer.toString("hex");
@@ -19,4 +25,5 @@ const generateRandomUniqueToken = () => {
 module.exports = {
   generatePasswordHash,
   generateRandomUniqueToken,
+  comparePassword,
 };
