@@ -8,7 +8,7 @@ To install and run the backend server for the Shelf, you need to install these p
 - Node.js
 - NPM
 - Docker
-- MongoDB: You can this custom build MongoDB image from this [repo](https://github.com/vksonagara/pa.mongo.git) with installation instructions
+- MongoDB: You can use this custom build MongoDB image from this [repo](https://github.com/vksonagara/pa.mongo.git) with installation instructions
 
 ### Instructions
 - Clone the repo
