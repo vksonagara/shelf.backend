@@ -11,6 +11,13 @@ class FolderApi {
 
     return { folder };
   }
+
+  static async getUserFolderList(object, options) {
+    const { user } = options;
+    const folders = await FolderUtils.getUserFolderList({ userId: user.id });
+
+    return { folders };
+  }
 }
 
 module.exports = FolderApi;

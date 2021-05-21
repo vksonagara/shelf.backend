@@ -1,3 +1,5 @@
+const _ = require("lodash");
+const moment = require("moment-timezone");
 const Folder = require("../../models/Folder");
 
 class FolderUtils {
@@ -8,6 +10,17 @@ class FolderUtils {
     });
 
     return folder.toJSON();
+  }
+
+  static async getUserFolderList({ userId }) {
+    const folders = await Folder.find({ userId }).lean();
+
+    _.forEach(folders, (folder) => {
+      folder.createdAt = moment(folder.createdAt).fromNow();
+      folder.updatedAt = moment(folder.updatedAt).fromNow();
+    });
+
+    return folders;
   }
 }
 
