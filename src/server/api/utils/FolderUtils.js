@@ -1,6 +1,7 @@
 const _ = require("lodash");
 const moment = require("moment-timezone");
 const Folder = require("../../models/Folder");
+const errors = require("../../errors");
 
 class FolderUtils {
   static async createFolder({ name, userId }) {
@@ -21,6 +22,18 @@ class FolderUtils {
     });
 
     return folders;
+  }
+
+  static async updateFolder({ name, folderId, userId }) {
+    const folder = await Folder.findOne({ _id: folderId, userId });
+
+    if (!folder) {
+      throw new errors.NotFoundError("Folder not found");
+    }
+
+    folder.name = name || folder.name;
+
+    await folder.save();
   }
 }
 

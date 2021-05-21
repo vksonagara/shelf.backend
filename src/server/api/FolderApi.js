@@ -18,6 +18,14 @@ class FolderApi {
 
     return { folders };
   }
+
+  static async updateFolder(object, options) {
+    const { name } = object;
+    const { folderId } = options.params;
+    const { user } = options;
+    ApiValidator.validate(folderSchemas.updateFolderSchema, { name, folderId });
+    await FolderUtils.updateFolder({ name, folderId, userId: user.id });
+  }
 }
 
 module.exports = FolderApi;

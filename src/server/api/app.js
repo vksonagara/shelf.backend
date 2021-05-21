@@ -18,6 +18,11 @@ router.post("/users/sign-out", api.http(api.UserApi.signOut));
 // Folder APIs
 router.post("/folders", checkAuthN, api.http(api.FolderApi.createFolder));
 router.get("/folders", checkAuthN, api.http(api.FolderApi.getUserFolderList));
+router.patch(
+  "/folders/:folderId",
+  checkAuthN,
+  api.http(api.FolderApi.updateFolder)
+);
 
 // Middleware to handle not found error and other errors
 router.use(handleResourceNotFountError);

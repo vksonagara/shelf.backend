@@ -6,7 +6,10 @@ const JWT_TOKEN = {
   REMEMBER_ME_DURATION: 7 * 24 * 60 * 60, // 7 days
 };
 
+const OBJECT_ID_REGEX = /^[a-f\d]{24}$/i;
+
 module.exports = {
   verificationTokenExpirePeriod,
   JWT_TOKEN,
+  OBJECT_ID_REGEX,
 };

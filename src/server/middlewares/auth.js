@@ -38,9 +38,9 @@ const checkAuthN = async (req, res, next) => {
 
     req.user = decodedRefreshToken.user;
     res.setHeader("x-access-token", newAccessToken);
+  } else {
+    req.user = decodedAccessToken.user;
   }
-
-  req.user = decodedAccessToken.user;
 
   return next();
 };
