@@ -61,10 +61,9 @@ const env = process.env.NODE_ENV || "development";
   };
 
   const pathToLogs = `${pathToContent}/logs`;
-  const pathToUpload = `${pathToContent}/uploads`;
 
   // make sure the directory exists and we have enough permissions on it
-  [pathToLogs, pathToUpload].forEach((dir) => {
+  [pathToLogs].forEach((dir) => {
     fs.mkdirpSync(dir);
     checkPermissions(dir);
   });
@@ -74,7 +73,6 @@ const env = process.env.NODE_ENV || "development";
     root: pathToRoot,
     content: pathToContent,
     logs: pathToLogs,
-    upload: pathToUpload,
   });
 })();
 
