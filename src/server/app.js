@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(compress());
 
 // enable cors
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 
 // logging request
 app.use(requestLogMiddleware);

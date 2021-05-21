@@ -20,9 +20,9 @@ const sendVerifyEmail = async ({ firstName, emailId, verificationToken }) => {
             Name: firstName,
           },
         ],
-        Subject: "PA signup - verify email address",
+        Subject: "Shelf - verify email address",
         TextPart: `Hi ${firstName}, Please verify your email using this link: ${config.get(
-          "server:host"
+          "frontend:url"
         )}/verify-email?token=${verificationToken}`,
       },
     ],
