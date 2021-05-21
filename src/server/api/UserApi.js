@@ -118,7 +118,7 @@ class UserApi {
     await UserUtils.destroyUserSession(refreshToken);
 
     return function (req, res, next) {
-      res.clearCookie();
+      res.clearCookie("refreshToken");
       res.end();
     };
   }
