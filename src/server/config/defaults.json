@@ -20,5 +20,8 @@
   "jwt": {
     "accessSecret": "secret",
     "refreshSecret": "secret"
+  },
+  "frontend": {
+    "url": "localhost:3000"
   }
 }
