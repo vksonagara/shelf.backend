@@ -50,3 +50,6 @@ jspm_packages
 
 # VS code settings
 .vscode/settings.json
+
+# .idea folder
+.idea/

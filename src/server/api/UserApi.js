@@ -59,6 +59,9 @@ class UserApi {
       {
         user: {
           id: user._id,
+          emailId: user.emailId,
+          firstName: user.firstName,
+          lastName: user.lastName,
         },
       },
       rememberMe

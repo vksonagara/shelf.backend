@@ -1,11 +1,19 @@
 const _ = require("lodash");
 const AppStatusAPI = require("./AppStatusApi");
 const UserApi = require("./UserApi");
+const FolderApi = require("./FolderApi");
 
 const http = function http(apiMethod) {
   return async function apiHandler(req, res, next) {
     const object = req.body;
-    const requestKeys = ["file", "files", "headers", "params", "query", "cookies"];
+    const requestKeys = [
+      "file",
+      "files",
+      "headers",
+      "params",
+      "query",
+      "cookies",
+    ];
 
     const options = {
       ..._.pick(req, requestKeys),
@@ -45,4 +53,5 @@ module.exports = {
   http,
   AppStatusAPI,
   UserApi,
+  FolderApi,
 };
