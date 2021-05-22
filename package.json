@@ -4,7 +4,8 @@
   "description": "Productivity app backend",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon --max-old-space-size=8192 src/index.js"
+    "start": "nodemon --max-old-space-size=8192 src/index.js",
+    "api:docs": "swagger-merger -i api-docs/index.yaml -o assets/swagger.json"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,8 @@
   },
   "homepage": "https://github.com/vksonagara/pa.backend#readme",
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "swagger-merger": "^1.4.3"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -36,7 +38,8 @@
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.12.9",
     "nconf": "^0.11.2",
-    "node-mailjet": "^3.3.1",
+    "node-mailjet": "^3.3.4",
+    "swagger-ui-express": "^4.1.6",
     "uuid": "^8.3.2",
     "winston": "^3.3.3"
   }

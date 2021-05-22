@@ -1,10 +1,13 @@
 const { Schema, model } = require("mongoose");
 
-const UserVerificationTokenSchema = new Schema({
-  token: { type: String, required: true },
-  userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  expiresAt: { type: Date, required: true, default: null },
-});
+const UserVerificationTokenSchema = new Schema(
+  {
+    token: { type: String, required: true },
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    expiresAt: { type: Date, required: true, default: null },
+  },
+  { timestamps: true }
+);
 
 const UserVerificationToken = model(
   "UserVerificationToken",

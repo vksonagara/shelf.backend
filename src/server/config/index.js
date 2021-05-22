@@ -72,6 +72,7 @@ const env = process.env.NODE_ENV || "development";
   nconf.set(`paths`, {
     root: pathToRoot,
     content: pathToContent,
+    assets: path.join(pathToRoot, "assets"),
     logs: pathToLogs,
   });
 })();

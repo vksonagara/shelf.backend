@@ -1,0 +1,91 @@
+/users/sign-up:
+  post:
+    tags:
+      - User APIs
+    summary: New user sign up
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SignUpBody"
+    responses:
+      200:
+        description: Sign up success
+      400:
+        description: Validation Error
+      409:
+        description: Email already exists
+      500:
+        description: Internal server error
+
+/users/verify-email:
+  post:
+    tags:
+      - User APIs
+    summary: Verify email address
+    parameters:
+      - name: token
+        in: query
+        required: true
+        type: string
+    responses:
+      200:
+        description: Verification success
+      400:
+        description: Validation Error
+      409:
+        description: Invalid/Expired token
+      500:
+        description: Internal server error
+
+/users/sign-in:
+  post:
+    tags:
+      - User APIs
+    summary: User sign in
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SignInBody"
+    responses:
+      200:
+        description: Sign in success
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignInResponse"
+      400:
+        description: Validation error
+      409:
+        description: Invalid credentials
+      500:
+        description: Internal server error
+
+/users/refresh:
+  get:
+    tags:
+      - User APIs
+    summary: Refresh access token
+    responses:
+      200:
+        description: Access token refresh success
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignInResponse"
+      401:
+        description: Unauthenticated
+      500:
+        description: Internal server error
+
+/users/sign-out:
+  post:
+    tags:
+      - User APIs
+    summary: User sign out
+    responses:
+      200:
+        description: Sign out success
+      500:
+        description: Internal server error

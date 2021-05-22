@@ -1,0 +1,5 @@
+# Users APIs
+$ref#users: ./users.yaml
+
+# Notes APIs
+$ref#notes: ./notes.yaml

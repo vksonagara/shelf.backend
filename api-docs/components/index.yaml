@@ -1,0 +1,9 @@
+schemas:
+  $ref#User: ./user.yaml
+  $ref#Note: ./note.yaml
+
+securitySchemes:
+  bearerAuth:
+    type: http
+    scheme: bearer
+    bearerFormat: JWT

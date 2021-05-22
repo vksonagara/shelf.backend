@@ -32,7 +32,7 @@ const MongoConnector = {
       useNewUrlParser: true,
       useFindAndModify: false,
       useCreateIndex: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     };
 
     await mongoose.connect(mongoUri, connectOptions);
@@ -51,7 +51,7 @@ const MongoConnector = {
         await import("./" + fileName);
       });
 
-    debug("Completed Pre-loading models!")
+    debug("Completed Pre-loading models!");
   },
 
   async closeConnections() {

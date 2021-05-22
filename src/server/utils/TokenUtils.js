@@ -40,8 +40,19 @@ const verifyRefreshToken = async (token) => {
   }
 };
 
+const verifyAccessToken = async (token) => {
+  try {
+    const payload = await jwt.verify(token, config.get("jwt:accessSecret"));
+
+    return payload;
+  } catch (err) {
+    return {};
+  }
+};
+
 module.exports = {
   createAccessToken,
   createRefreshToken,
   verifyRefreshToken,
+  verifyAccessToken
 };

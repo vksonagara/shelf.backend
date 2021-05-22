@@ -1,0 +1,24 @@
+SignUpBody:
+  properties:
+    firstName:
+      type: string
+    lastName:
+      type: string
+    emailId:
+      type: string
+    password:
+      type: string
+
+SignInBody:
+  properties:
+    emailId:
+      type: string
+    password:
+      type: string
+    rememberMe:
+      type: boolean
+
+SignInResponse:
+  properties:
+    accessToken:
+      type: string
