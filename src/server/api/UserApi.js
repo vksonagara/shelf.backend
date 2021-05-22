@@ -21,7 +21,7 @@ class UserApi {
       verificationToken,
     });
 
-    return user;
+    return { message: "Sign up successful" };
   }
 
   static async verifyEmail(object, options) {

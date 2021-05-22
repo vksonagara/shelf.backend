@@ -9,7 +9,7 @@ const { checkAuthN } = require("../middlewares/auth");
 router.get("/live", api.http(api.AppStatusAPI.getLiveStatus));
 
 // User APIs
-router.post("/users/signup", api.http(api.UserApi.signup));
+router.post("/users/sign-up", api.http(api.UserApi.signup));
 router.post("/users/verify-email", api.http(api.UserApi.verifyEmail));
 router.post("/users/sign-in", api.http(api.UserApi.signIn));
 router.get("/users/refresh", api.http(api.UserApi.refreshAccessToken));

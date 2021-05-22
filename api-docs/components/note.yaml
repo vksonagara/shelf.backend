@@ -1,0 +1,47 @@
+CreateFolderBody:
+  properties:
+    name:
+      type: string
+
+CreateFolderResponse:
+  properties:
+    folder:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        notesCount:
+          type: integer
+        userId:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+
+FolderList:
+  properties:
+    folders:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+          name:
+            type: string
+          notesCount:
+            type: integer
+          userId:
+            type: string
+          createdAt:
+            type: string
+          updatedAt:
+            type: string
+
+UpdateFolderBody:
+  properties:
+    name:
+      type: string

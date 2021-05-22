@@ -53,3 +53,7 @@ jspm_packages
 
 # .idea folder
 .idea/
+
+# swagger json
+assets/swagger.json
+assets/openapi.json

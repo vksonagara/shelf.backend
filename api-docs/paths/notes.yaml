@@ -1,0 +1,63 @@
+/folders:
+  post:
+    tags:
+      - Notes APIs
+    summary: Create a folder
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateFolderBody"
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFolderResponse"
+      400:
+        description: Validation error
+      401:
+        description: Unauthenticated
+      500:
+        description: Internal server error
+  get:
+    tags:
+      - Notes APIs
+    summary: Get all folders of a user
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FolderList"
+      401:
+        description: Unauthenticated
+      500:
+        description: Internal server error
+  
+/folders/{folderId}:
+  patch:
+    tags:
+      - Notes APIs
+    summary: Update a folder
+    parameters:
+      - name: folderId
+        in: path
+        required: true
+        type: string
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateFolderBody"
+    responses:
+      200:
+        description: Success
+      401:
+        description: Unauthenticated
+      404:
+        description: Resource not found
+      500:
+        description: Internal server error     

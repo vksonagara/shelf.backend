@@ -3,13 +3,13 @@ const errors = require("../errors");
 const TokenUtils = require("../utils/TokenUtils");
 
 const checkAuthN = async (req, res, next) => {
-  const authHeader = req.headers["authorization"];
+  const authHeader = req.headers["authorization"] || req.headers["Authorization"];
 
   if (!authHeader) {
     return next(new errors.AuthenticationError("Unauthenticated"));
   }
 
-  const accessToken = authHeader.split("Shelf ")[1];
+  const accessToken = authHeader.split(" ")[1];
 
   if (!accessToken) {
     return next(new errors.AuthenticationError("Unauthenticated"));

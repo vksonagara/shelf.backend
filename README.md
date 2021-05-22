@@ -1,8 +1,11 @@
 # Shelf Backend Application Server
+
 This project contains the backend application logic for the Shelf app. Shelf is a web application with suite of productivity apps such as Notes, Todo, Calendar etc.
 
 ## Installation
+
 ### Requirements
+
 To install and run the backend server for the Shelf, you need to install these programs and tools:
 
 - Node.js
@@ -11,6 +14,7 @@ To install and run the backend server for the Shelf, you need to install these p
 - MongoDB: You can use this custom build MongoDB image from this [repo](https://github.com/vksonagara/pa.mongo.git) with installation instructions
 
 ### Instructions
+
 - Clone the repo
 - Run `npm install`
 - Create `config` folder on root of the project
@@ -19,3 +23,11 @@ To install and run the backend server for the Shelf, you need to install these p
 - Create `content` folder on root of the project
 - Create `logs` folder inside the `content` folder
 - Run `npm start`
+
+### API Docs
+
+To generate the Swagger UI for API docs
+
+- Create `assets` folder on root of the project
+- Run `npm run api:docs`
+- Now you can see the Swagger API docs after starting the server at `/api-docs` route
