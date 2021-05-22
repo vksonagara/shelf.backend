@@ -26,6 +26,13 @@ class FolderApi {
     ApiValidator.validate(folderSchemas.updateFolderSchema, { name, folderId });
     await FolderUtils.updateFolder({ name, folderId, userId: user.id });
   }
+
+  static async deleteFolder(object, options) {
+    const { folderId } = options.params;
+    const { user } = options;
+    ApiValidator.validate(folderSchemas.deleteFolderSchema, { folderId });
+    await FolderUtils.deleteFolder({ folderId, userId: user.id });
+  }
 }
 
 module.exports = FolderApi;

@@ -1,6 +1,8 @@
 const _ = require("lodash");
 const moment = require("moment-timezone");
+const mongoose = require("mongoose");
 const Folder = require("../../models/Folder");
+const Note = require("../../models/Note");
 const errors = require("../../errors");
 
 class FolderUtils {
@@ -34,6 +36,24 @@ class FolderUtils {
     folder.name = name || folder.name;
 
     await folder.save();
+  }
+
+  static async deleteFolder({ folderId, userId }) {
+    const folder = await Folder.findOne({ _id: folderId, userId });
+
+    if (!folder) {
+      throw new errors.NotFoundError("Folder not found");
+    }
+
+    await mongoose.connection.transaction(async () => {
+      return Promise.all([
+        Folder.deleteOne({ _id: folderId, userId }),
+        Note.updateMany(
+          { folderId, userId },
+          { $set: { isDeleted: true, deletedAt: moment().format() } }
+        ),
+      ]);
+    });
   }
 }
 
