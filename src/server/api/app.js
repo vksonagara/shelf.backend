@@ -23,6 +23,7 @@ router.patch(
   checkAuthN,
   api.http(api.FolderApi.updateFolder)
 );
+router.delete("/folders/:folderId", checkAuthN, api.http(api.FolderApi.deleteFolder));
 
 // Middleware to handle not found error and other errors
 router.use(handleResourceNotFountError);

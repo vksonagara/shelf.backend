@@ -10,7 +10,12 @@ const updateFolderSchema = Joi.object({
   name: Joi.string().allow(""),
 });
 
+const deleteFolderSchema = Joi.object({
+  folderId: Joi.string().regex(OBJECT_ID_REGEX).required(),
+});
+
 module.exports = {
   createFolderSchema,
   updateFolderSchema,
+  deleteFolderSchema,
 };
