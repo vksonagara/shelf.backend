@@ -12,7 +12,7 @@ const sendVerifyEmail = async ({ firstName, emailId, verificationToken }) => {
       {
         From: {
           Email: "vksonagara1996@gmail.com",
-          Name: "PA",
+          Name: "Shelf",
         },
         To: [
           {
