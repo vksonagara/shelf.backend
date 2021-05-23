@@ -92,3 +92,23 @@ GetFolderNotesResponse:
             type: string
           updatedAt:
             type: string
+
+NoteDetailsResponse:
+  properties:
+    note:
+      type: object
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        folderId:
+          type: string
+        userId:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
