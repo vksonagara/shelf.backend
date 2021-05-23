@@ -80,11 +80,16 @@
       500:
         description: Internal server error
 
-/notes:
+/folders/{folderId}/notes:
   post:
     tags:
       - Notes APIs
     summary: Create a note
+    parameters:
+      - name: folderId
+        in: path
+        required: true
+        type: string
     requestBody:
       content:
         application/json:
@@ -97,3 +102,32 @@
           application/json:
             schema:
               $ref: "#/components/schemas/CreateNoteResponse"
+      400:
+        description: Validation error
+      401:
+        description: Unauthenticated
+      500:
+        description: Internal server error
+
+  get:
+    tags:
+      - Notes APIs
+    summary: Get list of notes inside a folder
+    parameters:
+      - name: folderId
+        in: path
+        required: true
+        type: string
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetFolderNotesResponse"
+      400:
+        description: Validation error
+      401:
+        description: Unauthenticated
+      500:
+        description: Internal server error

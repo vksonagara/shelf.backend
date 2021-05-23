@@ -23,10 +23,19 @@ router.patch(
   checkAuthN,
   api.http(api.FolderApi.updateFolder)
 );
-router.delete("/folders/:folderId", checkAuthN, api.http(api.FolderApi.deleteFolder));
+router.delete(
+  "/folders/:folderId",
+  checkAuthN,
+  api.http(api.FolderApi.deleteFolder)
+);
 
 // Notes APIs
-router.post("/notes", checkAuthN, api.http(api.NoteApi.createNote));
+router.post("/folders/:folderId/notes", checkAuthN, api.http(api.NoteApi.createNote));
+router.get(
+  "/folders/:folderId/notes",
+  checkAuthN,
+  api.http(api.NoteApi.getFolderNotes)
+);
 
 // Middleware to handle not found error and other errors
 router.use(handleResourceNotFountError);

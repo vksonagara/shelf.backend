@@ -4,11 +4,32 @@ const NoteUtils = require("./utils/NoteUtils");
 
 class NoteApi {
   static async createNote(object, options) {
-    const { user } = options;
-    ApiValidator.validate(noteSchemas.createNoteSchema, object);
-    const note = await NoteUtils.createNote({ ...object, userId: user.id });
+    const { user, params } = options;
+    const { folderId } = params;
 
-    return note;
+    ApiValidator.validate(noteSchemas.createNoteSchema, {
+      ...object,
+      folderId,
+    });
+
+    const note = await NoteUtils.createNote({
+      ...object,
+      folderId,
+      userId: user.id,
+    });
+
+    return { note };
+  }
+
+  static async getFolderNotes(object, options) {
+    const { user, params } = options;
+    const { folderId } = params;
+
+    ApiValidator.validate(noteSchemas.getFolderNotes, { folderId });
+
+    const notes = await NoteUtils.getFolderNotes({ folderId, userId: user.id });
+
+    return { notes };
   }
 }
 
