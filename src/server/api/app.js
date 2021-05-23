@@ -36,6 +36,7 @@ router.get(
   checkAuthN,
   api.http(api.NoteApi.getFolderNotes)
 );
+router.get("/notes/:noteId", checkAuthN, api.http(api.NoteApi.getDetails));
 
 // Middleware to handle not found error and other errors
 router.use(handleResourceNotFountError);

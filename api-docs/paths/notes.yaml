@@ -131,3 +131,29 @@
         description: Unauthenticated
       500:
         description: Internal server error
+
+/notes/{noteId}:
+  get:
+    tags:
+      - Notes APIs
+    summary: Get details of a note
+    parameters:
+      - name: noteId
+        in: path
+        required: true
+        type: string
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NoteDetailsResponse"
+      400:
+        description: Validation error
+      401:
+        description: Unauthenticated
+      404:
+        description: Resource not found
+      500:
+        description: Internal server error

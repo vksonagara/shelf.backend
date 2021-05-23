@@ -31,6 +31,17 @@ class NoteApi {
 
     return { notes };
   }
+
+  static async getDetails(object, options) {
+    const { user, params } = options;
+    const { noteId } = params;
+
+    ApiValidator.validate(noteSchemas.getDetails, { noteId });
+
+    const note = await NoteUtils.getDetails({ noteId, userId: user.id });
+
+    return { note };
+  }
 }
 
 module.exports = NoteApi;
