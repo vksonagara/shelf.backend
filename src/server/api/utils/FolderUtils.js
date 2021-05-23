@@ -7,12 +7,15 @@ const errors = require("../../errors");
 
 class FolderUtils {
   static async createFolder({ name, userId }) {
-    const folder = await Folder.create({
+    const folder = (await Folder.create({
       name,
       userId,
-    });
+    })).toJSON();
 
-    return folder.toJSON();
+    folder.createdAt = moment(folder.createdAt).fromNow();
+    folder.updatedAt = moment(folder.updatedAt).fromNow();
+
+    return folder;
   }
 
   static async getUserFolderList({ userId }) {
