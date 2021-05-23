@@ -7,6 +7,11 @@ const createNoteSchema = Joi.object({
   folderId: Joi.string().regex(AppConstants.OBJECT_ID_REGEX).required(),
 });
 
+const getFolderNotes = Joi.object({
+  folderId: Joi.string().regex(AppConstants.OBJECT_ID_REGEX).required(),
+});
+
 module.exports = {
   createNoteSchema,
+  getFolderNotes,
 };

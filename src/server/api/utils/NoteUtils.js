@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const moment = require("moment-timezone");
 const mongoose = require("mongoose");
 const Note = require("../../models/Note");
@@ -20,6 +21,17 @@ class NoteUtils {
     note.updatedAt = moment(note.updatedAt).fromNow();
 
     return note;
+  }
+
+  static async getFolderNotes({ folderId, userId }) {
+    const notes = await Note.find({ folderId, userId }, { content: 0 }).lean();
+
+    _.forEach(notes, (note) => {
+      note.createdAt = moment(note.createdAt).fromNow();
+      note.updatedAt = moment(note.updatedAt).fromNow();
+    });
+
+    return notes;
   }
 }
 

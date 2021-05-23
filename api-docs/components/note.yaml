@@ -52,22 +52,43 @@ CreateNoteBody:
       type: string
     content:
       type: string
-    folderId:
-      type: string
 
 CreateNoteResponse:
   properties:
-    _id:
-      type: string
-    title:
-      type: string
-    content:
-      type: string
-    folderId:
-      type: string
-    userId:
-      type: string
-    createdAt:
-      type: string
-    updatedAt:
-      type: string
+    note:
+      type: object
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        folderId:
+          type: string
+        userId:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+
+GetFolderNotesResponse:
+  properties:
+    notes:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+          title:
+            type: string
+          folderId:
+            type: string
+          userId:
+            type: string
+          createdAt:
+            type: string
+          updatedAt:
+            type: string
