@@ -2,6 +2,7 @@ const _ = require("lodash");
 const AppStatusAPI = require("./AppStatusApi");
 const UserApi = require("./UserApi");
 const FolderApi = require("./FolderApi");
+const NoteApi = require("./NoteApi");
 
 const http = function http(apiMethod) {
   return async function apiHandler(req, res, next) {
@@ -54,4 +55,5 @@ module.exports = {
   AppStatusAPI,
   UserApi,
   FolderApi,
+  NoteApi
 };

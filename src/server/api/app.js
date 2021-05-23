@@ -25,6 +25,9 @@ router.patch(
 );
 router.delete("/folders/:folderId", checkAuthN, api.http(api.FolderApi.deleteFolder));
 
+// Notes APIs
+router.post("/notes", checkAuthN, api.http(api.NoteApi.createNote));
+
 // Middleware to handle not found error and other errors
 router.use(handleResourceNotFountError);
 router.use(handleJSONResponse);

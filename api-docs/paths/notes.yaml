@@ -79,3 +79,21 @@
         description: Resource not found
       500:
         description: Internal server error
+
+/notes:
+  post:
+    tags:
+      - Notes APIs
+    summary: Create a note
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateNoteBody"
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateNoteResponse"
