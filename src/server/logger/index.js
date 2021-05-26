@@ -29,7 +29,9 @@ const logger = winston.createLogger({
 
 // Adding `console` as transports for development
 if (config.get("env") !== "production") {
-  logger.add(new winston.transports.Console({}));
+  logger.add(
+    new winston.transports.Console({ format: winston.format.prettyPrint() })
+  );
 }
 
 // request logger middleware
