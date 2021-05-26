@@ -112,3 +112,12 @@ NoteDetailsResponse:
           type: string
         updatedAt:
           type: string
+
+NoteUpdateBody:
+  properties:
+    title:
+      type: string
+    content:
+      type: string
+    folderId:
+      type: string

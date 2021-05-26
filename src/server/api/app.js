@@ -30,13 +30,19 @@ router.delete(
 );
 
 // Notes APIs
-router.post("/folders/:folderId/notes", checkAuthN, api.http(api.NoteApi.createNote));
+router.post(
+  "/folders/:folderId/notes",
+  checkAuthN,
+  api.http(api.NoteApi.createNote)
+);
 router.get(
   "/folders/:folderId/notes",
   checkAuthN,
   api.http(api.NoteApi.getFolderNotes)
 );
 router.get("/notes/:noteId", checkAuthN, api.http(api.NoteApi.getDetails));
+router.patch("/notes/:noteId", checkAuthN, api.http(api.NoteApi.updateNote));
+router.delete("/notes/:noteId", checkAuthN, api.http(api.NoteApi.deleteNote));
 
 // Middleware to handle not found error and other errors
 router.use(handleResourceNotFountError);
