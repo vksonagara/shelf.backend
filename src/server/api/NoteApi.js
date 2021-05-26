@@ -42,6 +42,24 @@ class NoteApi {
 
     return { note };
   }
+
+  static async updateNote(object, options) {
+    const { user, params } = options;
+    const { noteId } = params;
+
+    ApiValidator.validate(noteSchemas.updateNote, { ...object, noteId });
+
+    await NoteUtils.updateNote({ note: object, noteId, userId: user.id });
+  }
+
+  static async deleteNote(object, options) {
+    const { user, params } = options;
+    const { noteId } = params;
+
+    ApiValidator.validate(noteSchemas.deleteNote, { noteId });
+
+    await NoteUtils.deleteNote({ noteId, userId: user.id });
+  }
 }
 
 module.exports = NoteApi;
