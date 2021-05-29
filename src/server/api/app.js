@@ -43,6 +43,22 @@ router.get(
 router.get("/notes/:noteId", checkAuthN, api.http(api.NoteApi.getDetails));
 router.patch("/notes/:noteId", checkAuthN, api.http(api.NoteApi.updateNote));
 router.delete("/notes/:noteId", checkAuthN, api.http(api.NoteApi.deleteNote));
+router.get("/archive/notes", checkAuthN, api.http(api.NoteApi.getArchiveNotes));
+router.delete(
+  "/archive/notes/:noteId",
+  checkAuthN,
+  api.http(api.NoteApi.deleteArchiveNote)
+);
+router.get(
+  "/archive/notes/:noteId",
+  checkAuthN,
+  api.http(api.NoteApi.getArchiveNoteDetails)
+);
+router.patch(
+  "/archive/notes/:noteId",
+  checkAuthN,
+  api.http(api.NoteApi.restoreNote)
+);
 
 // Middleware to handle not found error and other errors
 router.use(handleResourceNotFountError);

@@ -91,7 +91,7 @@ class FolderUtils {
       return Promise.all([
         Folder.deleteOne({ _id: folderId, userId }),
         Note.updateMany(
-          { folderId, userId },
+          { folderId, userId, isDeleted: false },
           { $set: { isDeleted: true, deletedAt: moment().format() } }
         ),
       ]);
