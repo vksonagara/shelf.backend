@@ -60,6 +60,47 @@ class NoteApi {
 
     await NoteUtils.deleteNote({ noteId, userId: user.id });
   }
+
+  static async getArchiveNotes(object, options) {
+    const { user } = options;
+
+    const notes = await NoteUtils.getArchiveNotes({ userId: user.id });
+
+    return { notes };
+  }
+
+  static async deleteArchiveNote(object, options) {
+    const { user, params } = options;
+    const { noteId } = params;
+
+    ApiValidator.validate(noteSchemas.deleteNote, { noteId });
+
+    await NoteUtils.deleteArchiveNote({ noteId, userId: user.id });
+  }
+
+  static async getArchiveNoteDetails(object, options) {
+    const { user, params } = options;
+    const { noteId } = params;
+
+    ApiValidator.validate(noteSchemas.getDetails, { noteId });
+
+    const note = await NoteUtils.getArchiveNoteDetails({
+      noteId,
+      userId: user.id,
+    });
+
+    return { note };
+  }
+
+  static async restoreNote(object, options) {
+    const { user, params, query } = options;
+    const { noteId } = params;
+    const { folderId } = query;
+
+    ApiValidator.validate(noteSchemas.restoreNote, { noteId, folderId });
+
+    await NoteUtils.restoreNote({ noteId, folderId, userId: user.id });
+  }
 }
 
 module.exports = NoteApi;

@@ -63,7 +63,9 @@ class NoteUtils {
 
   static async deleteNote({ noteId, userId }) {
     const noteFilterQuery = { _id: noteId, userId, isDeleted: false };
-    const noteUpdateQuery = { $set: { isDeleted: true } };
+    const noteUpdateQuery = {
+      $set: { isDeleted: true, deletedAt: moment().format() },
+    };
 
     await Note.updateOne(noteFilterQuery, noteUpdateQuery);
   }
@@ -87,6 +89,49 @@ class NoteUtils {
 
       count++;
     }
+  }
+
+  static async getArchiveNotes({ userId }) {
+    const noteFilterQuery = { userId, isDeleted: true };
+    const noteSelectQuery = { title: 1, userId: 1, deletedAt: 1 };
+
+    const notes = await Note.find(noteFilterQuery, noteSelectQuery).lean();
+
+    _.forEach(notes, (note) => {
+      note.deletedAt = moment(note.deletedAt).fromNow();
+    });
+
+    return notes;
+  }
+
+  static async deleteArchiveNote({ noteId, userId }) {
+    const noteFilterQuery = { userId, _id: noteId, isDeleted: true };
+
+    await Note.deleteOne(noteFilterQuery);
+  }
+
+  static async getArchiveNoteDetails({ noteId, userId }) {
+    const noteFilterQuery = { userId, _id: noteId, isDeleted: true };
+    const noteSelectQuery = { title: 1, content: 1, userId: 1, deletedAt: 1 };
+
+    const note = await Note.find(noteFilterQuery, noteSelectQuery).lean();
+
+    if (!note) {
+      throw new errors.NotFoundError("Archive note not found");
+    }
+
+    note.deletedAt = moment(note.deletedAt).fromNow();
+
+    return { note };
+  }
+
+  static async restoreNote({ noteId, folderId, userId }) {
+    const noteFilterQuery = { _id: noteId, userId, isDeleted: true };
+    const noteUpdateQuery = {
+      $set: { folderId, isDeleted: false, deletedAt: null },
+    };
+
+    await Note.updateOne(noteFilterQuery, noteUpdateQuery);
   }
 }
 

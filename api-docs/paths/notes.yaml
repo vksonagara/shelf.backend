@@ -200,3 +200,84 @@
         description: Unauthenticated
       500:
         description: Internal server error
+
+/archive/notes:
+  get:
+    tags:
+      - Notes APIs
+    summary: Get archived notes
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetArchiveNotesResponse"
+      401:
+        description: Unauthenticated
+      500:
+        description: Internal server error
+
+/archive/notes/{noteId}:
+  delete:
+    tags:
+      - Notes APIs
+    summary: Delete a archived note
+    parameters:
+      - name: noteId
+        in: path
+        required: true
+        type: string
+    responses:
+      200:
+        description: Success
+      400:
+        description: Valdiation error
+      401:
+        description: Unauthenticated
+      500:
+        description: Internal server error
+  get:
+    tags:
+      - Notes APIs
+    summary: Get details of an archive note
+    parameters:
+      - name: noteId
+        in: path
+        required: true
+        type: string
+    responses:
+      200:
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetArchiveNoteDetailResponse"
+      400:
+        description: Validation error
+      401:
+        description: Unauthenticated
+      500:
+        description: Internal server error
+  patch:
+    tags:
+      - Notes APIs
+    summary: Restore a archived note to a folder
+    parameters:
+      - name: noteId
+        in: path
+        required: true
+        type: string
+      - name: folderId
+        in: query
+        required: true
+        type: string
+    responses:
+      200:
+        description: Success
+      400:
+        description: Validation error
+      401:
+        description: Unauthenticated
+      500:
+        description: Internal server error

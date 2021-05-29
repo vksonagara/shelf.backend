@@ -26,10 +26,16 @@ const deleteNote = Joi.object({
   noteId: Joi.string().regex(AppConstants.OBJECT_ID_REGEX).required(),
 });
 
+const restoreNote = Joi.object({
+  noteId: Joi.string().regex(AppConstants.OBJECT_ID_REGEX).required(),
+  folderId: Joi.string().regex(AppConstants.OBJECT_ID_REGEX).required(),
+});
+
 module.exports = {
   createNoteSchema,
   getFolderNotes,
   getDetails,
   updateNote,
   deleteNote,
+  restoreNote,
 };
