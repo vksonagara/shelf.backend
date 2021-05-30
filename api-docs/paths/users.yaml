@@ -89,3 +89,41 @@
         description: Sign out success
       500:
         description: Internal server error
+
+/users/forgot-password:
+  post:
+    tags:
+      - User APIs
+    summary: Send forgot password link to user email
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EmailInput"
+    responses:
+      200:
+        description: Success
+      400:
+        description: Validation error
+      500:
+        description: Internal server error
+
+/users/reset-password:
+  post:
+    tags:
+      - User APIs
+    summary: Reset password
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResetPasswordBody"
+    responses:
+      200:
+        description: Success
+      400:
+        description: Validation error
+      409:
+        description: Token invalid/expired
+      500:
+        description: Internal server error

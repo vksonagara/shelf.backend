@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const AppConstants = require("../constants/AppConstants");
 
 const UserVerificationTokenSchema = new Schema(
   {
@@ -9,6 +10,11 @@ const UserVerificationTokenSchema = new Schema(
   { timestamps: true }
 );
 
+UserVerificationTokenSchema.index(
+  { createdAt: 1 },
+  { expires: AppConstants.USER_TOKEN.VERIFICATION_TOKEN_EXPIRE_PERIOD }
+);
+
 const UserVerificationToken = model(
   "UserVerificationToken",
   UserVerificationTokenSchema,
@@ -16,5 +22,3 @@ const UserVerificationToken = model(
 );
 
 module.exports = UserVerificationToken;
-
-// Use cron jobs delete expired tokens

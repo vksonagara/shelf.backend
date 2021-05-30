@@ -23,5 +23,11 @@
   },
   "frontend": {
     "url": "localhost:3000"
+  },
+  "mail": {
+    "info": {
+      "email": "vksonagara1996@gmail.com",
+      "name": "Shelf"
+    }
   }
 }

@@ -1,9 +1,13 @@
 const _ = require("lodash");
+const moment = require("moment-timezone");
+const mongoose = require("mongoose");
 const User = require("../../models/User");
 const UserSession = require("../../models/UserSession");
 const CryptoUtils = require("../../utils/CryptoUtils");
 const errors = require("../../errors");
 const UserVerificationTokenUtils = require("./UserVerificationTokenUtils");
+const AppConstants = require("../../constants/AppConstants");
+const UserForgotPasswordToken = require("../../models/UserForgotPasswordToken");
 
 class UserUtils {
   static async addUser({ firstName, lastName, emailId, password }) {
@@ -98,6 +102,47 @@ class UserUtils {
     await UserSession.deleteOne({
       refreshToken,
     });
+  }
+
+  // create forgot password token for a user
+  static async createForgotPasswordToken({ tokenHash, userId, emailId }) {
+    await mongoose.connection.transaction(async () => {
+      await UserForgotPasswordToken.deleteMany({ emailId });
+      await UserForgotPasswordToken.create({
+        tokenHash,
+        userId,
+        emailId,
+        expiresAt: moment().add(
+          AppConstants.USER_TOKEN.FORGOT_PASSWORD_TOKEN_EXPIRE_PERIOD,
+          "milliseconds"
+        ),
+      });
+    });
+  }
+
+  static async isValidForgotPasswordToken({ token, emailId }) {
+    const forgotPasswordToken = await UserForgotPasswordToken.findOne({
+      emailId,
+    }).lean();
+
+    if (!forgotPasswordToken) {
+      return false;
+    }
+
+    const isValid = await CryptoUtils.compareToken(
+      token,
+      forgotPasswordToken.tokenHash
+    );
+
+    const isNotExpired = moment() > moment(forgotPasswordToken.expiresAt);
+
+    return (isValid && isNotExpired) ? forgotPasswordToken : {};
+  }
+
+  static async changePassword({ userId, password }) {
+    const passwordHash = await CryptoUtils.generatePasswordHash(password);
+
+    await User.updateOne({ _id: userId }, { $set: { password: passwordHash } });
   }
 }
 

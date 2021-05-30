@@ -17,8 +17,20 @@ const signInSchema = Joi.object({
   rememberMe: Joi.boolean().required(),
 });
 
+const forgotPassword = Joi.object({
+  emailId: Joi.string().required(),
+});
+
+const resetPassword = Joi.object({
+  emailId: Joi.string().required(),
+  newPassword: Joi.string().required(),
+  token: Joi.string().required(),
+});
+
 module.exports = {
   signupSchema,
   verifyEmailSchema,
   signInSchema,
+  forgotPassword,
+  resetPassword,
 };
