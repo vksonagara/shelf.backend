@@ -5,6 +5,7 @@ const UserUtils = require("./utils/UserUtils");
 const MailerUtils = require("../utils/MailerUtils");
 const UserVerificationTokenUtils = require("./utils/UserVerificationTokenUtils");
 const TokenUtils = require("../utils/TokenUtils");
+const CryptoUtils = require("../utils/CryptoUtils");
 const errors = require("../errors");
 
 class UserApi {
@@ -124,6 +125,54 @@ class UserApi {
       res.clearCookie("refreshToken");
       res.end();
     };
+  }
+
+  static async sendForgotPasswordLink(object, options) {
+    ApiValidator.validate(userSchemas.forgotPassword, object);
+    const { emailId } = object;
+
+    const userFilter = { emailId, isVerified: 1, isDeleted: false };
+    const user = await UserUtils.getUser(userFilter);
+
+    if (!user) {
+      return;
+    }
+
+    const token = CryptoUtils.generateUniqueToken128Bytes();
+    const tokenHash = await CryptoUtils.generateTokenHash(token);
+
+    await UserUtils.createForgotPasswordToken({
+      tokenHash,
+      userId: user._id,
+      emailId,
+    });
+
+    // send forgot password mail to user email
+    MailerUtils.sendForgotPasswordMail({
+      firstName: user.firstName,
+      emailId,
+      token,
+    });
+  }
+
+  static async resetPassword(object, options) {
+    ApiValidator.validate(userSchemas.resetPassword, object);
+    const { emailId, newPassword, token } = object;
+
+    const validToken = await UserUtils.isValidForgotPasswordToken({
+      token,
+      emailId,
+    });
+
+    if (_.isEmpty(validToken)) {
+      throw new errors.AppError("Token invalid/expired", 409);
+    }
+
+    await UserUtils.changePassword({
+      userId: validToken.userId,
+      password: newPassword,
+    });
+    await UserUtils.destroyUserSessions(validToken.userId);
   }
 }
 

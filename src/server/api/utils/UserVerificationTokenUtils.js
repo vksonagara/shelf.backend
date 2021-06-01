@@ -9,7 +9,10 @@ class UserVerificationTokenUtils {
 
     // Create expire date for token
     const expiresAt = moment()
-      .add(AppConstants.verificationTokenExpirePeriod, "days")
+      .add(
+        AppConstants.USER_TOKEN.VERIFICATION_TOKEN_EXPIRE_PERIOD,
+        "milliseconds"
+      )
       .toDate();
 
     const userVerificationToken = await UserVerificationToken.create({

@@ -1,9 +1,11 @@
 const _ = require("lodash");
+const UserUtils = require("../api/utils/UserUtils");
 const errors = require("../errors");
 const TokenUtils = require("../utils/TokenUtils");
 
 const checkAuthN = async (req, res, next) => {
-  const authHeader = req.headers["authorization"] || req.headers["Authorization"];
+  const authHeader =
+    req.headers["authorization"] || req.headers["Authorization"];
 
   if (!authHeader) {
     return next(new errors.AuthenticationError("Unauthenticated"));
@@ -29,6 +31,21 @@ const checkAuthN = async (req, res, next) => {
     );
 
     if (_.isEmpty(decodedRefreshToken)) {
+      return next(new errors.AuthenticationError("Unauthenticated"));
+    }
+
+    const userSessions = await UserUtils.getUserSessions(
+      decodedRefreshToken.user.id
+    );
+    let isValidSession = false;
+
+    _.forEach(userSessions, (userSession) => {
+      if (userSession.refreshToken === refreshToken) {
+        isValidSession = true;
+      }
+    });
+
+    if (!isValidSession) {
       return next(new errors.AuthenticationError("Unauthenticated"));
     }
 

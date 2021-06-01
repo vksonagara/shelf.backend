@@ -61,6 +61,7 @@ const env = process.env.NODE_ENV || "development";
   };
 
   const pathToLogs = `${pathToContent}/logs`;
+  const pathToTemplates = `${process.cwd()}/templates`;
 
   // make sure the directory exists and we have enough permissions on it
   [pathToLogs].forEach((dir) => {
@@ -74,6 +75,7 @@ const env = process.env.NODE_ENV || "development";
     content: pathToContent,
     assets: path.join(pathToRoot, "assets"),
     logs: pathToLogs,
+    templates: pathToTemplates,
   });
 })();
 

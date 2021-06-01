@@ -22,3 +22,17 @@ SignInResponse:
   properties:
     accessToken:
       type: string
+
+EmailInput:
+  properties:
+    emailId:
+      type: string
+
+ResetPasswordBody:
+  properties:
+    token:
+      type: string
+    emailId:
+      type: string
+    newPassword:
+      type: string
