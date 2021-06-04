@@ -34,10 +34,7 @@ const sendVerifyEmail = async ({ firstName, emailId, verificationToken }) => {
             Name: firstName,
           },
         ],
-        Subject: "Shelf - verify email address",
-        // TextPart: `Hi ${firstName}, Please verify your email using this link: ${config.get(
-        //   "frontend:url"
-        // )}/verify-email?token=${verificationToken}`,
+        Subject: "Shelf - Verify email address",
         HTMLPart: htmlContent,
       },
     ],
@@ -70,10 +67,7 @@ const sendForgotPasswordMail = async ({ firstName, emailId, token }) => {
             Name: firstName,
           },
         ],
-        Subject: "Shelf - reset password",
-        // TextPart: `Hi ${firstName}, Here is the link to reset your password: ${config.get(
-        //   "frontend:url"
-        // )}/reset-password?token=${token}`,
+        Subject: "Shelf - Reset password",
         HTMLPart: htmlContent,
       },
     ],
