@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const fs = require("fs-extra");
 const config = require("../config");
 const MongoUtils = require("../utils/MongoUtils");
-const debug = require("debug")("pa:database");
+const debug = require("debug")("shelf:database");
 
 let __connectionEstablished = false;
 
