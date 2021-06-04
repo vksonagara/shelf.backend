@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["NODE_ENV=production node src/index.js"]
+CMD ["node", "src/index.js"]
