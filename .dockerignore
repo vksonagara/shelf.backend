@@ -1,0 +1,23 @@
+# Build files
+build.sh
+deploy.sh
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Node modules
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# Environment file
+.env

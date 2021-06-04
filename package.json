@@ -22,7 +22,7 @@
     "swagger-merger": "^1.4.3"
   },
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "bluebird": "^3.7.2",
     "body-parse": "^0.1.0",
     "compression": "^1.7.4",

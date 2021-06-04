@@ -1,6 +1,6 @@
 const fs = require("fs-extra");
 const express = require("express");
-const debug = require("debug")("pa:init");
+const debug = require("debug")("shelf:init");
 // const helmet = require("helmet");
 const cors = require("cors");
 const bodyParser = require("body-parser");
