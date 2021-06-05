@@ -4,4 +4,4 @@
 
 docker rm -f shelf.backend
 
-bash ~/containers/shelf.sh
+bash ~/containers/shelf_backend.sh
