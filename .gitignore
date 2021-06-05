@@ -57,3 +57,6 @@ jspm_packages
 # swagger json
 assets/swagger.json
 assets/openapi.json
+
+# shelf.sh
+shelf.sh
