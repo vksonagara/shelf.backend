@@ -1,6 +1,7 @@
 # Build files
 build.sh
 deploy.sh
+shelf.sh
 
 # Logs
 logs
@@ -21,3 +22,8 @@ node_modules/
 
 # Environment file
 .env
+
+config
+content
+.idea
+.vscode
