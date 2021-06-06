@@ -6,7 +6,7 @@
   "delay": 600,
   "env": {
     "NODE_ENV": "development",
-    "DEBUG": "pa:*",
+    "DEBUG": "shelf:*",
     "DEBUG_DEPTH": null
   }
 }

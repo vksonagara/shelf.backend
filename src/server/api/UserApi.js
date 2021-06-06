@@ -134,7 +134,7 @@ class UserApi {
     const userFilter = { emailId, isVerified: 1, isDeleted: false };
     const user = await UserUtils.getUser(userFilter);
 
-    if (!user) {
+    if (_.isEmpty(user)) {
       return;
     }
 
