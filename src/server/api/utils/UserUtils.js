@@ -134,15 +134,21 @@ class UserUtils {
       forgotPasswordToken.tokenHash
     );
 
-    const isNotExpired = moment() > moment(forgotPasswordToken.expiresAt);
+    const isNotExpired = moment() < moment(forgotPasswordToken.expiresAt);
 
-    return (isValid && isNotExpired) ? forgotPasswordToken : {};
+    return isValid && isNotExpired ? forgotPasswordToken : {};
   }
 
   static async changePassword({ userId, password }) {
     const passwordHash = await CryptoUtils.generatePasswordHash(password);
 
-    await User.updateOne({ _id: userId }, { $set: { password: passwordHash } });
+    await mongoose.connection.transaction(async () => {
+      await UserForgotPasswordToken.deleteMany({ userId });
+      await User.updateOne(
+        { _id: userId },
+        { $set: { password: passwordHash } }
+      );
+    });
   }
 }
 
